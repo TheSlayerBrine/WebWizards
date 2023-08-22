@@ -1,4 +1,4 @@
-﻿namespace WebWizards.Services.Users
+﻿namespace WebWizards.Services.ServiceObjects.Users
 {
     public class CreateUserDto
     {

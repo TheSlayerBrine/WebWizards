@@ -7,39 +7,30 @@
         {
             dbContext = context;
         }
-        T IRepository<T>.GetById(object id)
+
+        public IEnumerable<T> GetAll()
+        {
+            return dbContext.Set<T>().ToList();
+
+        }
+        public T Find(int id)
+        {
+            return dbContext.Set<T>().Find(id); 
+        }
+
+        public void Update(T entity)
         {
             throw new NotImplementedException();
         }
 
-        void IRepository<T>.Added(T entity)
+        public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            dbContext.Set<T>().Remove(entity);
         }
 
-        IEnumerable<T> IRepository<T>.GetAll()
+        public void Add(T entity)
         {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<T> IRepository<T>.Find()
-        {
-            throw new NotImplementedException();
-        }
-
-        void IRepository<T>.Update(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IRepository<T>.Delete(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IRepository<T>.Add(T entity)
-        {
-            throw new NotImplementedException();
+           dbContext.Set<T>().Add(entity);
         }
     }
 }
