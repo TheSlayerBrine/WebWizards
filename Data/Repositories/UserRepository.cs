@@ -20,20 +20,6 @@ namespace WebWizards.Data.Repositories
 
         public void Delete(User entity)
         {
-            if (entity.Comments != null)
-            {
-                entity = dbContext.Users.OrderBy(e => e.Name).Include(e => e.Comments).First();
-            }
-
-            if (entity.Posts != null)
-            {
-                entity = dbContext.Users.OrderBy(e => e.Name).Include(e => e.Posts).First();
-            }
-
-            if (entity.Likes != null)
-            {
-                entity = dbContext.Users.OrderBy(e => e.Name).Include(e => e.Likes).First();
-            }
             dbContext.Users.Remove(entity);
         }
 

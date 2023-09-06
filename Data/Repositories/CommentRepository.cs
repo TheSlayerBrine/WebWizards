@@ -19,11 +19,6 @@ namespace WebWizards.Data.Repositories
 
         public void Delete(Comment entity)
         {
-
-            if (entity.Likes != null)
-            {
-                entity = dbContext.Comments.OrderBy(e => e.Id).Include(e => e.Likes).First();
-            }
             dbContext.Comments.Remove(entity);
         }
 
