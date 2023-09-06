@@ -12,13 +12,18 @@ namespace WebWizards.Services.Mappers
             {
                 return null;
             }
-
+            if(entity.Likes is null)
+            {
+                entity.Likes = new List<Like>();
+            }
             return new CommentDto
             {
                 Id = entity.Id,
                 Text = entity.Text,
                 PostId = entity.PostId,
                 UserId = entity.UserId,
+                CreatedAt = entity.CreatedAt,
+                Likes = entity.Likes.Select(l => l.ToDto()).ToList()
             };
         }
         public static Comment ToEntity(this CommentDto dto)
@@ -35,6 +40,8 @@ namespace WebWizards.Services.Mappers
                 Text = dto.Text,
                 PostId = dto.PostId,
                 UserId = dto.UserId,
+                CreatedAt = dto.CreatedAt,
+                Likes = dto.Likes.Select(l => l.ToEntity()).ToList()
             };
         }
     }

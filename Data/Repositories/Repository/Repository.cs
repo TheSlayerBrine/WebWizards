@@ -1,4 +1,6 @@
-﻿namespace WebWizards.Data.Repositories.Repository
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace WebWizards.Data.Repositories.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
@@ -20,7 +22,8 @@
 
         public void Update(T entity)
         {
-            throw new NotImplementedException();
+          dbContext.Set<T>().Attach(entity);
+          dbContext.Entry(entity).State = EntityState.Modified;
         }
 
         public void Delete(T entity)

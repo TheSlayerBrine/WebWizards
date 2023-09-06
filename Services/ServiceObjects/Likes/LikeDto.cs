@@ -7,12 +7,9 @@ namespace WebWizards.Services.ServiceObjects.Likes
 {
     public class LikeDto
     {
-        public int Id { get; set; }
-        public UserDto User { get; set; }
-        public int UserId { get; set; }
-        public PostDto Post { get; set; }
+        public int Id { get; set; }   
+        public int UserId { get; set; } 
         public int? PostId { get; set; }
-        public CommentDto Comment { get; set; }
         public int? CommentId { get; set; }
     }
 }

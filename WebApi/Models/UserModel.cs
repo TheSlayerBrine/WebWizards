@@ -10,7 +10,7 @@ namespace WebWizards.WebApi.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public DateTime CreatedAt { get; set; }
-        public List<CommentModel> Comments { get; set; }
+       public List<CommentModel> Comments { get; set; }
         public List<PostModel> Posts { get; set; }
         public List<LikeModel> Likes { get; set; }
     }

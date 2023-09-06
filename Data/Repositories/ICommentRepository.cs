@@ -6,6 +6,7 @@ namespace WebWizards.Data.Repositories
     {
         public IEnumerable<Comment> GetAllCommentsOfPost(int postId);
         public IEnumerable<Comment> GetAllCommentsOfUser(int userId);
+        public Comment GetById(int id);
 
     }
 }

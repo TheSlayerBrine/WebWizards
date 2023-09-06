@@ -5,9 +5,9 @@ namespace WebWizards.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly AppDbContext dBContext;
+        private readonly IAppDbContext dBContext;
         public UnitOfWork(
-            AppDbContext dBContext,
+            IAppDbContext dBContext,
             IUserRepository userRepository,
             IPostRepository postRepository,
             ICommentRepository commentRepository,

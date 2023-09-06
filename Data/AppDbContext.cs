@@ -3,18 +3,10 @@ using WebWizards.Data.Entities;
 
 namespace WebWizards.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : DbContext, IAppDbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (optionsBuilder != null)
-            {
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-NFKHDAA\\SQLEXPRESS01;Initial Catalog=dotNFT;Integrated Security=True;TrustServerCertificate=True");
-            }
-
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,15 +15,15 @@ namespace WebWizards.Data
             modelBuilder.Entity<User>()
                .HasMany(u => u.Comments)
                .WithOne(c => c.User)
-               .HasForeignKey(c => c.User.Id);
+               .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<User>()
                .HasMany(u => u.Posts)
                .WithOne(p => p.User)
-               .HasForeignKey(p => p.User.Id);
+               .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<User>()
                .HasMany(u => u.Likes)
                .WithOne(l => l.User)
-               .HasForeignKey(l => l.User.Id);
+               .OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Entity<Post>()
@@ -39,18 +31,24 @@ namespace WebWizards.Data
             modelBuilder.Entity<Post>()
                .HasMany(p => p.Comments)
                .WithOne(c => c.Post)
-               .HasForeignKey(c => c.Post.Id);
+               .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<Post>()
                .HasMany(p => p.Likes)
                .WithOne(l => l.Post)
-               .HasForeignKey(l => l.Post.Id);
+               .OnDelete(DeleteBehavior.Cascade);
+
 
             modelBuilder.Entity<Comment>()
                .HasKey(c => c.Id);
             modelBuilder.Entity<Comment>()
                .HasMany(c => c.Likes)
                .WithOne(l => l.Comment)
-               .HasForeignKey(l => l.Comment.Id);
+               .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.User)
+                .WithMany(u => u.Comments);
 
             modelBuilder.Entity<Like>()
                .HasKey(l => l.Id);

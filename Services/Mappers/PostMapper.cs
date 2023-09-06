@@ -11,6 +11,14 @@ namespace WebWizards.Services.Mappers
             {
                 return null;
             }
+            if (entity.Likes is null)
+            {
+                entity.Likes = new List<Like>();
+            }
+            if (entity.Comments is null)
+            {
+                entity.Comments = new List<Comment>();
+            }
             return new PostDto
             {
                 Id = entity.Id,
@@ -18,7 +26,8 @@ namespace WebWizards.Services.Mappers
                 Image = entity.Image,
                 CreatedAt = entity.CreatedAt,
                 UserId = entity.UserId,
-                User = entity.User.ToDto(),
+                Comments = entity.Comments.Select(c => c.ToDto()).ToList(),
+                Likes = entity.Likes.Select(l => l.ToDto()).ToList()
             };
         }
         public static Post ToEntity(this PostDto dto)
@@ -35,7 +44,8 @@ namespace WebWizards.Services.Mappers
                 Image = dto.Image,
                 CreatedAt = dto.CreatedAt,
                 UserId = dto.UserId,
-                User = dto.User.ToEntity()
+                Comments = dto.Comments.Select(c => c.ToEntity()).ToList(),
+                Likes = dto.Likes.Select(l => l.ToEntity()).ToList()
             };
         }
     }

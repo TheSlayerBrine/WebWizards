@@ -2,7 +2,7 @@
 
 namespace WebWizards.Services.ServiceObjects.Posts
 {
-    public class CreatePostDto
+    public class PostDetailsDto
     {
         public string Text { get; set; }
         public string? Image { get; set; }

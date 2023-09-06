@@ -17,9 +17,6 @@ namespace WebWizards.Services.Mappers
                 CommentId = entity.CommentId,
                 PostId = entity.PostId,
                 UserId = entity.UserId,
-                User = entity.User.ToDto(),
-                Post = entity.Post.ToDto(),
-                Comment = entity.Comment.ToDto()
             };
         }
         public  static Like ToEntity(this LikeDto dto)
@@ -34,10 +31,7 @@ namespace WebWizards.Services.Mappers
                 CommentId = dto.CommentId,
                 PostId = dto.PostId,
                 UserId = dto.UserId,
-                User = dto.User.ToEntity(),
-                Comment = dto.Comment.ToEntity(),
-                Post = dto.Post.ToEntity(),
-            }
+            };
         }
     }
 }

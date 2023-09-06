@@ -11,7 +11,8 @@ namespace WebWizards.WebApi.Models
         public string Text { get; set; }
         public string? Image { get; set; }
         public DateTime CreatedAt { get; set; }
-        public UserModel User { get; set; }
         public int UserId { get; set; }
+        public List<CommentModel> Comments { get; set; }
+        public List<LikeModel> Likes { get; set; }
     }
 }

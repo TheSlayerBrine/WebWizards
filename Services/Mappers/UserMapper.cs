@@ -1,4 +1,5 @@
-﻿using WebWizards.Data.Entities;
+﻿using System.Xml;
+using WebWizards.Data.Entities;
 using WebWizards.Services.ServiceObjects.Users;
 
 namespace WebWizards.Services.Mappers
@@ -11,13 +12,28 @@ namespace WebWizards.Services.Mappers
             {
                 return null;
             }
+            if (entity.Likes is null)
+            {
+                entity.Likes = new List<Like>();
+            }
+            if (entity.Comments is null)
+            {
+                entity.Comments = new List<Comment>();
+            }
+            if (entity.Posts is null)
+            {
+                entity.Posts = new List<Post>();
+            }
             return new UserDto
             {
                 Id = entity.Id,
                 Name = entity.Name,
                 Email = entity.Email,
                 Password = entity.Password,
-                CreatedAt = entity.CreatedAt
+                CreatedAt = entity.CreatedAt,
+                Comments = entity.Comments.Select(c => c.ToDto()).ToList(),
+                Posts = entity.Posts.Select(p => p.ToDto()).ToList(),
+                Likes = entity.Likes.Select(l => l.ToDto()).ToList()
             };
         }
         public static User ToEntity(this UserDto dto)
@@ -33,7 +49,10 @@ namespace WebWizards.Services.Mappers
                 Name = dto.Name,
                 Email = dto.Email,
                 Password = dto.Password,
-                CreatedAt = dto.CreatedAt
+                CreatedAt = dto.CreatedAt,
+                Comments = dto.Comments.Select(c => c.ToEntity()).ToList(),
+                Posts = dto.Posts.Select(p => p.ToEntity()).ToList(),
+                Likes = dto.Likes.Select(l => l.ToEntity()).ToList()
             };
         }
     }
